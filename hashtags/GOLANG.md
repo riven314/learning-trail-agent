@@ -10,3 +10,4 @@
 - [Go Atomic Operations and PriceMonitor](../2026-01-01/go-atomic-operations-and-pricemonitor.md) - Atomic operations, torn reads, atomic.Value vs atomic.Pointer[T], hybrid push-pull pattern with channels and atomics
 - [Go Interface Boxing and Nil Internals](../2026-01-01/go-interface-boxing-nil-internals.md) - Interface iface struct (tab/data pointers), boxing mechanism, typed nil problem root cause, heap allocation, error return best practices
 - [Go Error Interface](../2026-01-01/go-error-interface.md) - error as interface type, common implementations, errors.As() for type extraction, typed nil gotcha in error returns
+- [Go Type Assertions and Reflection](../2026-01-02/go-type-assertions-and-reflection.md) - Runtime type handling: type assertions for known types, reflection for dynamic field access, architectural patterns for solving circular imports
