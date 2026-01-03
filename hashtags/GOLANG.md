@@ -11,3 +11,4 @@
 - [Go Interface Boxing and Nil Internals](../2026-01-01/go-interface-boxing-nil-internals.md) - Interface iface struct (tab/data pointers), boxing mechanism, typed nil problem root cause, heap allocation, error return best practices
 - [Go Error Interface](../2026-01-01/go-error-interface.md) - error as interface type, common implementations, errors.As() for type extraction, typed nil gotcha in error returns
 - [Go Type Assertions and Reflection](../2026-01-02/go-type-assertions-and-reflection.md) - Runtime type handling: type assertions for known types, reflection for dynamic field access, architectural patterns for solving circular imports
+- [Go Type Assertions, Reflection & Boundary Patterns](../2026-01-03/go-type-assertions-reflection-boundaries.md) - Type system deep dive: type assertions vs reflection, nominal typing, circular import solutions, callback bridge pattern, boundary layer architecture for multi-exchange trading
