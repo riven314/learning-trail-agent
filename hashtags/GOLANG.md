@@ -12,3 +12,4 @@
 - [Go Error Interface](../2026-01-01/go-error-interface.md) - error as interface type, common implementations, errors.As() for type extraction, typed nil gotcha in error returns
 - [Go Type Assertions and Reflection](../2026-01-02/go-type-assertions-and-reflection.md) - Runtime type handling: type assertions for known types, reflection for dynamic field access, architectural patterns for solving circular imports
 - [Go Type Assertions, Reflection & Boundary Patterns](../2026-01-03/go-type-assertions-reflection-boundaries.md) - Type system deep dive: type assertions vs reflection, nominal typing, circular import solutions, callback bridge pattern, boundary layer architecture for multi-exchange trading
+- [Go Interfaces and Generics](../2026-01-03/go-interfaces-and-generics.md) - Interface semantics (implicit implementation, empty interface internals), generics (type parameters, constraints, GCShape stenciling), when to use each abstraction approach
