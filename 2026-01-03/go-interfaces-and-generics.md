@@ -132,16 +132,71 @@ n := result + 10   // works directly, type is still int
 2. group types by "shape" (memory layout)
 3. generate one specialized version per shape
 
-### What is a "Shape"?
-Types with same memory layout share a shape:
-- all pointers have same shape (8 bytes on 64-bit)
-- each primitive has its own shape
+### What is a "Shape"? (Detailed)
+
+"Shape" refers to how a type is represented in memory — specifically its **size**, **alignment**, and **whether the garbage collector needs to scan it for pointers**.
+
+#### Types That Share a Shape
+
+**All pointers have the same shape** — they're all just memory addresses (8 bytes on 64-bit systems):
 
 ```go
-First([]int{...})     // shape: int
-First([]*Dog{...})    // shape: pointer
-First([]*Cat{...})    // shape: pointer → shares code with *Dog!
+*int, *string, *Dog, *Cat  // all same shape: "pointer"
 ```
+
+**All types that "contain a pointer" in the same way:**
+
+```go
+[]int, []string, []Dog     // slices: all same shape (pointer + len + cap)
+map[string]int, map[int]Dog // maps: all same shape (pointer to runtime struct)
+```
+
+#### Types That Have Different Shapes
+
+**Different sizes:**
+```go
+int8    // 1 byte
+int32   // 4 bytes
+int64   // 8 bytes
+// All different shapes - CPU handles differently
+```
+
+**Different memory layouts:**
+```go
+struct{ a int }           // 8 bytes
+struct{ a, b int }        // 16 bytes
+struct{ a int; b string } // different layout (contains pointer for GC)
+// All different shapes
+```
+
+#### Code Sharing Example
+
+```go
+func Print[T any](v T) { fmt.Println(v) }
+
+Print(&Dog{})    // shape: pointer  ─┐
+Print(&Cat{})    // shape: pointer  ─┴─ SHARE generated code
+
+Print(int32(1))  // shape: int32   ─┐
+Print(int64(2))  // shape: int64   ─┴─ SEPARATE generated code
+```
+
+#### The Key Question
+
+Shape is essentially asking: **"Can the CPU and garbage collector treat these types identically at the machine level?"**
+
+- **Yes** → Share one implementation (smaller binary)
+- **No** → Generate separate code (type-specific optimization)
+
+#### Shape Categories Summary
+
+| Shape Category | Examples | Why Same Shape |
+|---------------|----------|----------------|
+| Pointer | `*int`, `*Dog`, `*Cat` | All 8 bytes, all need GC scanning |
+| Slice | `[]int`, `[]string` | All pointer+len+cap (24 bytes) |
+| Map | `map[K]V` (any K,V) | All pointer to runtime hash table |
+| int64 | `int64`, `int` (on 64-bit) | Same size, no GC scanning |
+| int32 | `int32`, `rune` | Same size, no GC scanning |
 
 ### Trade-off
 
