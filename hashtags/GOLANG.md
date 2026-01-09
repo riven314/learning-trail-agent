@@ -15,3 +15,4 @@
 - [Go Interfaces and Generics](../2026-01-03/go-interfaces-and-generics.md) - Interface semantics (implicit implementation, empty interface internals), generics (type parameters, constraints, GCShape stenciling), when to use each abstraction approach
 - [Go Composition and Embedding](../2026-01-03/go-composition-and-embedding.md) - Composition-over-inheritance approach, embedding as automatic delegation, field/method promotion, collision handling, flexibility benefits over traditional inheritance
 - [TOCTOU Race Condition in Go](../2026-01-08/toctou-race-condition-golang.md) - Time-of-Check-Time-of-Use race condition pattern, atomic check-and-set fix, critical sections for check-modify sequences
+- [Copy-Under-Lock Pattern](../2026-01-10/copy-under-lock-pattern.md) - Concurrency pattern for safe callback invocation: copy data under lock, release lock, invoke callback with snapshot to minimize lock duration and prevent deadlocks
