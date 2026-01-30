@@ -1,6 +1,6 @@
 # System Design Fundamentals
 
-Context: consolidated system design interview notes covering core architecture patterns, message queues, database optimization, service discovery, and fault tolerance strategies.
+Context: core architecture patterns, message queues, database optimization, service discovery, and fault tolerance strategies for distributed systems.
 
 ## Architecture Patterns: Direct Write vs Message Queue
 
